@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #42945a;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 90%;
+            max-width: 420px;
+            background: lightseagreen;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.25);
+            display: grid;
+            gap: 1rem;
+            margin-top: 80px;
+        }
+        .container1 {
+            display: column;
+            margin-left: 550px;
+            height: 400px;
+            width: 250px;
+            max-width: 420px;
+            background: lightseagreen;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.25);
+            gap: 1rem;
+            margin-top: -450px;
+        }
+        .container2 {
+            display: column;
+            margin-left: 900px;
+            height: 400px;
+            width: 250px;
+            max-width: 420px;
+            background: lightseagreen;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.25);
+            gap: 1rem;
+            margin-top: -450px;
+        }
+        div {
+            margin: 20px;
+        }
+        h1,
+        h3 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4c4faf;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .one {
+            width: 350px;
+            justify-content: center;
+        }
+        .two {
+            text-align: center;
+            color: #14141e;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="two">
+        <h1>Car World</h1>
+    </div>
+    <div class="container">
+        <div>
+            <h3>Enter Details</h3>
+        </div>
+        <div>
+            <label for="brand">Car Brand</label>
+            <input type="text" id="empId">
+
+            <label for="empName">Price</label>
+            <input type="text" id="empName">
+
+            <label for="empAddress">key</label>
+            <input type="text" id="empAddress">
+
+            <button onclick="storeRecords()">Store Records</button>
+        </div>
+    </div>
+    <div class="container1">
+        <div>
+            <h3>Enter Key to Retrieve Item</h3>
+        </div>
+        <br>
+        <br> <br> <br>
+        <label for="Key">Key</label>
+        <input type="text" id="retrieveKey">
+        <br>
+        <button onclick="retrieveRecord()">Retrieve Records</button>
+    </div>
+    <div class="container2">
+        <div>
+            <h3>Enter Key to Delete Item</h3>
+        </div>
+        <br>
+        <br> <br> <br>
+        <label for="Key">Key</label>
+        <input type="text" id="deleteKey">
+        <br>
+        <button onclick="removeRecords()">Remove Records</button>
+    </div>
+    <div>
+        <button onclick="clearRecords()" id="one">Clear all Records</button>
+    </div>
+
+    <script>
+        let carRecords = {};
+
+        function storeRecords() {
+            const carBrand = document.getElementById("empId").value;
+            const price = document.getElementById("empName").value;
+            const key = document.getElementById("empAddress").value;
+
+            if (carRecords.hasOwnProperty(key)) {
+                console.error("Record with the provided key already exists. Use a different key.");
+                return;
+            }
+
+            carRecords[key] = { carBrand, price };
+
+            document.getElementById("empId").value = "";
+            document.getElementById("empName").value = "";
+            document.getElementById("empAddress").value = "";
+
+            console.log("Record stored successfully:", carRecords);
+        }
+
+        function retrieveRecord() {
+            const keyToRetrieve = document.getElementById("retrieveKey").value;
+
+            if (carRecords.hasOwnProperty(keyToRetrieve)) {
+                const record = carRecords[keyToRetrieve];
+                console.log("Record Found:", record);
+            } else {
+                console.warn("Record not found for the provided key.");
+            }
+        }
+
+        function removeRecords() {
+            const keyToRemove = document.getElementById("deleteKey").value;
+
+            if (carRecords.hasOwnProperty(keyToRemove)) {
+                delete carRecords[keyToRemove];
+                console.log(`Record with key ${keyToRemove} removed successfully. Updated Records:`, carRecords);
+            } else {
+                console.warn("Record not found for the provided key.");
+            }
+        }
+
+        function clearRecords() {
+            carRecords = {};
+            console.log("All records cleared successfully.");
+        }
+    </script>
+</body>
+
+</html>
+
+
